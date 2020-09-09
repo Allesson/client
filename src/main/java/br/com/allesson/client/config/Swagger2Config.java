@@ -2,6 +2,7 @@ package br.com.allesson.client.config;
 
 import java.util.ArrayList;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -18,6 +19,8 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @EnableSwagger2
 public class Swagger2Config {
 
+	@Value("${version}")
+    private String version;
 	
     @Bean
     public Docket api() {
@@ -29,7 +32,7 @@ public class Swagger2Config {
     }
     
     private ApiInfo apiEndPointsInfo() {
-    	ApiInfo apiInfo = new ApiInfo("CLIENTE REST API", "Cliente REST API", "1.0", "Termos do serviço", 
+    	ApiInfo apiInfo = new ApiInfo("CLIENTE REST API", "Cliente REST API", version, "Termos do serviço", 
     			new Contact("Allesson Cavalcante", "", "allessoncavalcante@gmail.com"), 
     			"Apache License Version 2.0", "http://www.apache.org/licenses/LICENSE-2.0.html", new ArrayList<VendorExtension>());
         return apiInfo;
