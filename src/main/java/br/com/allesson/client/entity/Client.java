@@ -29,6 +29,15 @@ public class Client implements Serializable {
 	
 	@Column(name ="telefone", columnDefinition = "character")
 	private String telefone;
+	
+	public Client(String cpf, String nome, String nomeReduzido, String sexo, String email, String telefone) {
+		this.cpf = cpf;
+		this.nome = nome;
+		this.nomeReduzido = nomeReduzido;
+		this.sexo = sexo;
+		this.email = email;
+		this.telefone = telefone;
+	}
 
 	public String getCpf() {
 		return cpf;

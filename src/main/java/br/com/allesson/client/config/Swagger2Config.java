@@ -27,7 +27,7 @@ public class Swagger2Config {
         return new Docket(DocumentationType.SWAGGER_2)
         		.select()
             .apis(RequestHandlerSelectors.basePackage("br.com.allesson.client.controller"))
-            .paths(PathSelectors.regex("/clients.*"))
+//            .paths(PathSelectors.regex("/api.*"))
             .build().apiInfo(apiEndPointsInfo());
     }
     

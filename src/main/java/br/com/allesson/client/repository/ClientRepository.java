@@ -14,13 +14,13 @@ import br.com.allesson.client.vo.ClientVO;
 @Repository
 public interface ClientRepository extends JpaRepository <Client, String> {
 	@Query(value = "SELECT new br.com.allesson.client.vo.ClientVO( "
-			+ "   cpf "
-			+ " , nome "
-			+ " , nomeReduzido "
-			+ " , sexo "
-			+ " , email "
-			+ " , telefone )"
-			+ " FROM Client")Page<ClientVO> getListClients(Pageable pageable);
+			+ "   cli.cpf "
+			+ " , cli.nome "
+			+ " , cli.nomeReduzido "
+			+ " , cli.sexo "
+			+ " , cli.email "
+			+ " , cli.telefone )"
+			+ " FROM Client cli")Page<ClientVO> getListClients(Pageable pageable);
 	@Modifying
 	@Transactional
 	@Query( value = "INSERT INTO tb_cliente "
@@ -28,5 +28,15 @@ public interface ClientRepository extends JpaRepository <Client, String> {
 			+ " VALUES (:cpf, :nome, :nomeReduzido, :sexo, :email, :telefone)", nativeQuery = true
 			)void insertClient(@Param("cpf") String cpf, @Param("nome") String nome, @Param("nomeReduzido") String nomeReduzido
 					, @Param("sexo") String sexo, @Param("email") String email, @Param("telefone") String telefone);
+	
+	@Query(value = "SELECT new br.com.allesson.client.vo.ClientVO( "
+			+ "   cli.cpf "
+			+ " , cli.nome "
+			+ " , cli.nomeReduzido "
+			+ " , cli.sexo "
+			+ " , cli.email "
+			+ " , cli.telefone )"
+			+ " FROM Client cli "
+			+ " WHERE cli.cpf = :cpf")ClientVO findByCpf(@Param("cpf") String cpf);
 
 }
