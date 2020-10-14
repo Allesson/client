@@ -31,7 +31,7 @@ public class ClientController {
 	@Autowired
 	private ClientService service;
 	
-	@GetMapping(value = "/{page}")
+	@GetMapping(value = "list/{page}")
 	@ApiOperation(value = "Retorna pagina com lista de clientes")
 	public ResponseEntity<Page<ClientVO>> findByPage(@PathVariable int page){
 		
@@ -40,13 +40,14 @@ public class ClientController {
 	}
 	
 	@GetMapping(value = "client-search")
-	@ApiOperation(value = "Retorna cliente")
+	@ApiOperation(value = "Retorna dados da consulta de um cliente")
 	public ResponseEntity<ClientVO> findByClient(@RequestParam String cpf){
 		ClientVO clientVO = service.findByClient(cpf);
 		return ResponseEntity.ok().body(clientVO);
 	}
 	
 	@PostMapping
+	@ApiOperation(value = "Insere um novo cliente")
 	public ResponseEntity<ClientVO> insert(@RequestBody ClientVO obj){
 		service.insertClient(obj);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
